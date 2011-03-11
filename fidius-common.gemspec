@@ -18,4 +18,9 @@ Gem::Specification.new do |s|
   s.test_files    = `git ls-files -- {test,spec,features}/*`.split("\n")
   s.executables   = `git ls-files -- bin/*`.split("\n").map{ |f| File.basename(f) }
   s.require_paths = ["lib"]
+
+  s.rdoc_options << '--title' << s.name <<
+                    '--main'  << 'README.md' << '--show-hash' <<
+                    `git ls-files -- lib/*`.split("\n") <<
+                    'README.md' << 'LICENSE'
 end

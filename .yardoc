@@ -1,0 +1,6 @@
+--title 'FIDIUS Common libraries'
+--private
+--protected
+--readme 'README.md'
+lib/**/*.rb -
+README.md LICENSE
