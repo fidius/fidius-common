@@ -3,7 +3,7 @@ $:.push File.expand_path("../lib", __FILE__)
 require "fidius-common/version"
 
 Gem::Specification.new do |s|
-  s.name        = "FIDIUS common libraries"
+  s.name        = "fidius-common"
   s.version     = FIDIUS::Common::VERSION
   s.platform    = Gem::Platform::RUBY
   s.authors     = ["Dominik Menke", "Bernd Katzmarski"]
