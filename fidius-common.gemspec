@@ -24,5 +24,5 @@ Gem::Specification.new do |s|
   s.rdoc_options << '--title' << s.name <<
                     '--main'  << 'README.md' << '--show-hash' <<
                     `git ls-files -- lib/*`.split("\n") <<
-                    'README.md' << 'LICENSE'
+                    'README.md' << 'LICENSE' << 'CREDITS.md'
 end

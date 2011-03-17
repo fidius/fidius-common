@@ -14,7 +14,7 @@ begin
 
   YARD::Rake::YardocTask.new(:doc) do |t|
     t.files = ['lib/**/*.rb']
-    static_files = 'LICENSE'
+    static_files = 'LICENSE,CREDITS.md'
     t.options += [
       '--title', 'FIDIUS Common libraries',
       '--private',   # include private methods

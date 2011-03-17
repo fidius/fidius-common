@@ -1,10 +1,8 @@
 # FIDIUS Common libraries
 
-This RubyGem collects some commonly used methods and module extensions
-of the FIDIUS project. These methods are meant to run standalone (i.e.
-without setting up a FIDIUS C&C server).
-
-Feel free to use them, too!
+This RubyGem is a small collection of some commonly used methods and
+module extensions of the FIDIUS project. These methods are meant to run
+standalone (i.e. without setting up a FIDIUS C&C server).
 
 
 ## Installation

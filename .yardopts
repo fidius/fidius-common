@@ -3,4 +3,4 @@
 --protected
 --readme 'README.md'
 lib/**/*.rb -
-LICENSE
+LICENSE CREDITS.md
