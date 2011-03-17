@@ -1,36 +1,40 @@
 # FIDIUS Common libraries
 
-The purpose of this package is...
+This RubyGem collects some commonly used methods and module extensions
+of the FIDIUS project. These methods are meant to run standalone (i.e.
+without setting up a FIDIUS C&C server).
 
-We will use these concepts to describe $foo: ...
-
-This package is targeted at...
+Feel free to use them, too!
 
 
 ## Installation
 
-Simply install this package with Rubygems:
+Simply install this package with RubyGems:
 
     $ gem install fidius-common
 
 
 ## Example of use
 
-To use this package as library, follow these steps:
+You can use this library as any other RubyGem:
 
-1. do this
-2. and
-3. that
+    require 'rubygems' if RUBY_VERSION < '1.9'
+    require 'fidius-common'
+
+For an overview of the provided methods, have a look into the
+[API documentation](http://rubydoc.info/gems/fidius-common/frames).
+Currently, there is no special sorting, but that may change in future.
 
 
 ## Authors and Contact
 
-Gemname was written by
+The common library was written by
 
 * FIDIUS Intrusion Detection with Intelligent User Support
-  <grp-fidius@tzi.de>, <http://fidius.me>
+  <grp-fidius+fidicom@tzi.de>, <http://fidius.me>
 * in particular:
   * Dominik Menke <dmke+fidicom@tzi.de>
+  * Bernd Katzmarski <bkatzm+fidicom@tzi.de>
 
 If you have any questions, remarks, suggestion, improvements,
 etc. feel free to drop a line at the addresses given above.

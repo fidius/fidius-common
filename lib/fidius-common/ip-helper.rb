@@ -6,6 +6,9 @@ module FIDIUS
 
     # Returns the IP address of that interface, which would connect to
     # an address of the given +iprange+.
+    #
+    # Thanks to Coderrr (https://coderrr.wordpress.com) for this
+    # implementation.
     # 
     # @see https://coderrr.wordpress.com/2008/05/28/get-your-local-ip-address/
     #
