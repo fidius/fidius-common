@@ -1,5 +1,5 @@
+require 't_helper'
 require 'fidius-common/json_symbol_addon'
-require 'test/unit'
 
 
 class JSONSymbolAddonTest < Test::Unit::TestCase
