@@ -48,22 +48,25 @@ module SerializationHelper
       end
     end
 
-    def dump(timestamp)
-
-      dir = "#{@db_entry}"
-      if timestamp
-        timestamp = Time.now
-        dir += "_#{timestamp.strftime("%Y-%m-%d_%H%M%S")}"
+    def dump(target_dir, timestamp)
+      unless target_dir.empty? and !Dir.exists?(target_dir)
+        target_dir += '/'
       end
+      dir = target_dir + @db_entry
+        if timestamp
+          timestamp = Time.now
+          dir += "_#{timestamp.strftime("%Y-%m-%d_%H%M%S")}"
+        end
 
-      Dir.mkdir dir
-      @data_dir = File.expand_path(dir)
-      @data_filename = "#{@data_dir}/#{@db_entry}.yml"
+        Dir.mkdir dir
+        @data_dir = File.expand_path(dir)
+        @data_filename = "#{@data_dir}/#{@db_entry}.yml"
 
       disable_logger
       dump_schema
       @dumper.dump(File.new(@data_filename, "w"))
       reenable_logger
+      @data_dir
     end
 
     def load(import_dir ,truncate = true)
