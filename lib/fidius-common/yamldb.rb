@@ -11,7 +11,7 @@ module FIDIUS
         dumper.dump
       end
 
-      def self.import(config_filename, db_entry, import_filename = "")
+      def self.import(config_filename, db_entry, import_filename)
         loader = SerializationHelper::Base.new(YamlDb::Helper, config_filename, db_entry, import_filename)
         loader.load_schema
         loader.load

@@ -41,7 +41,7 @@ module SerializationHelper
     def load_schema
       file = "schema.rb"
       if File.exists?(file)
-        load(file)
+        ActiveSupport::Dependencies::Loadable.load(file)
       else
         puts "#{file} does not exist!"
       end
@@ -64,9 +64,9 @@ module SerializationHelper
       end
     end
 
-    def load(filename, truncate = true)
+    def load(truncate = true)
       disable_logger
-      @loader.load(File.new(filename, "r"), truncate)
+      @loader.load(File.new(@data_filename, "r"), truncate)
       reenable_logger
     end
 
