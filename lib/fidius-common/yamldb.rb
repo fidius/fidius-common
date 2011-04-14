@@ -5,16 +5,14 @@ module FIDIUS
     module Db
       require "fidius-common/yamldb/yaml_db"
 
-      def self.export(config_filename, db_entry, export_filename = "")
-        dumper = SerializationHelper::Base.new(YamlDb::Helper, config_filename, db_entry, export_filename)
-        dumper.dump_schema
-        dumper.dump
+      def self.export(config_filename, db_entry, timestamp = true)
+        dumper = SerializationHelper::Base.new(YamlDb::Helper, config_filename, db_entry)
+        dumper.dump(timestamp)
       end
 
-      def self.import(config_filename, db_entry, import_filename)
-        loader = SerializationHelper::Base.new(YamlDb::Helper, config_filename, db_entry, import_filename)
-        loader.load_schema
-        loader.load
+      def self.import(config_filename, db_entry, import_dir)
+        loader = SerializationHelper::Base.new(YamlDb::Helper, config_filename, db_entry)
+        loader.load(import_dir)
       end
 
       #TODO:

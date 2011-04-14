@@ -3,11 +3,11 @@ module SerializationHelper
   class Base
     attr_reader :extension
 
-    def initialize(helper, config_filename, db_entry,  data_filename)
+    def initialize(helper, config_filename, db_entry)
       @dumper = helper.dumper
       @loader = helper.loader
       @extension = helper.extension
-      @data_filename = data_filename
+
       establish_connection(config_filename, db_entry)
     end
 
@@ -25,6 +25,7 @@ module SerializationHelper
       unless db_config
         raise "No entry '#{db_entry}' found in #{yml_file}"
       else
+        @db_entry = db_entry
         ActiveRecord::Base.establish_connection db_config
         ActiveRecord::Base.connection
       end
@@ -33,49 +34,47 @@ module SerializationHelper
     # copied and modified activerecord-3.0.6/lib/active_record/railties/database.rake
     def dump_schema
       require 'active_record/schema_dumper'
-      File.open("schema.rb", "w") do |file|
+      File.open(File.join(@data_dir ,'schema.rb'), "w") do |file|
         ActiveRecord::SchemaDumper.dump(ActiveRecord::Base.connection, file)
       end
     end
 
     def load_schema
-      file = "schema.rb"
+      file = File.join(@data_dir ,'schema.rb')
       if File.exists?(file)
         ActiveSupport::Dependencies::Loadable.load(file)
       else
-        puts "#{file} does not exist!"
+        puts "#{file} does not exist"
       end
     end
 
-    def dump
+    def dump(timestamp)
+
+      dir = "#{@db_entry}"
+      if timestamp
+        timestamp = Time.now
+        dir += "_#{timestamp.strftime("%Y-%m-%d_%H%M%S")}"
+      end
+
+      Dir.mkdir dir
+      @data_dir = File.expand_path(dir)
+      @data_filename = "#{@data_dir}/#{@db_entry}.yml"
+
       disable_logger
+      dump_schema
       @dumper.dump(File.new(@data_filename, "w"))
       reenable_logger
     end
 
-    def dump_to_dir(dirname)
-      Dir.mkdir(dirname)
-      tables = @dumper.tables
-      tables.each do |table|
-        io = File.new "#{dirname}/#{table}.#{@extension}", "w"
-        @dumper.before_table(io, table)
-        @dumper.dump_table io, table
-        @dumper.after_table(io, table)
-      end
-    end
-
-    def load(truncate = true)
-      disable_logger
-      @loader.load(File.new(@data_filename, "r"), truncate)
-      reenable_logger
-    end
-
-    def load_from_dir(dirname, truncate = true)
-      Dir.entries(dirname).each do |filename|
-        if filename =~ /^[.]/
-          next
-        end
-        @loader.load(File.new("#{dirname}/#{filename}", "r"), truncate)
+    def load(import_dir ,truncate = true)
+      if Dir.exists? import_dir
+        @data_dir = import_dir
+        disable_logger
+        load_schema
+        @loader.load(File.new("#{@data_dir}/#{@db_entry}.yml", "r"), truncate)
+        reenable_logger
+      else
+        puts "#{import_dir} does not exist!"
       end
     end
 
