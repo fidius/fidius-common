@@ -1,5 +1,5 @@
+require 't_helper'
 require 'fidius-common/ip-helper'
-require 'test/unit'
 
 class IPHelperTest < Test::Unit::TestCase
   def test_get_localhost
