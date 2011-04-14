@@ -1,4 +1,5 @@
 require 'fidius-common/ip-helper'
+require 'fidius-common/yamldb'
 
 # FIDIUS Intrusion Detection with Intelligent User Support.
 # @see http://fidius.me
@@ -7,9 +8,9 @@ module FIDIUS
   # non-FIDIUS context, since there are no other FIDIUS-related
   # dependencies.
   module Common
-  
+
     autoload :VERSION, './fidius-common/version'
-    
+
     # Since this addon changes behaviour of +to_json+, you have to
     # require it explicitly either with this helper method or manually
     # with
@@ -24,6 +25,6 @@ module FIDIUS
     def self.install_json_symbol_addon
       require 'fidius-common/json_symbol_addon'
     end
-  
+
   end # module Common
 end # module FIDIUS

@@ -3,22 +3,38 @@ module SerializationHelper
   class Base
     attr_reader :extension
 
-    def initialize(helper, filename, )
+    def initialize(helper, config_filename, db_entry,  data_filename)
       @dumper = helper.dumper
       @loader = helper.loader
       @extension = helper.extension
+      @data_filename = data_filename
+      establish_connection(config_filename, db_entry)
     end
 
-    def connection
-      yaml = YAML.load(File.read("database.yml"))
-      ActiveRecord::Base.establish_connection yaml["evasion_db"]
+    def establish_connection(yml_file, db_entry)
+      if yml_file.class == String
+        raise "#{yml_file} does not exist" unless File.exists? File.expand_path(yml_file)
+        yml_config = YAML.load(File.read(yml_file))
+        db_config = yml_config[db_entry]
+      elsif yml_file.class == Hash
+        # also react on connection settings given as hash
+        db_config = yml_file
+      else
+        raise "please input string or hash"
+      end
+      unless db_config
+        raise "No entry '#{db_entry}' found in #{yml_file}"
+      else
+        ActiveRecord::Base.establish_connection db_config
+        ActiveRecord::Base.connection
+      end
     end
 
     # copied and modified activerecord-3.0.6/lib/active_record/railties/database.rake
     def dump_schema
       require 'active_record/schema_dumper'
       File.open("schema.rb", "w") do |file|
-        ActiveRecord::SchemaDumper.dump(connection, file)
+        ActiveRecord::SchemaDumper.dump(ActiveRecord::Base.connection, file)
       end
     end
 
@@ -31,9 +47,9 @@ module SerializationHelper
       end
     end
 
-    def dump(filename)
+    def dump
       disable_logger
-      @dumper.dump(File.new(filename, "w"))
+      @dumper.dump(File.new(@data_filename, "w"))
       reenable_logger
     end
 
