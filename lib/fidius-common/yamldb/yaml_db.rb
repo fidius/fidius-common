@@ -1,3 +1,4 @@
+#Copied and modified from yamldb gem (https://github.com/ludicast/yaml_db)
 require 'yaml'
 require 'active_record'
 require 'fidius-common/yamldb/serialization_helper'

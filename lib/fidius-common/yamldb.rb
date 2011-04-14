@@ -14,13 +14,6 @@ module FIDIUS
         loader = SerializationHelper::Base.new(YamlDb::Helper, config_filename, db_entry)
         loader.load(import_dir)
       end
-
-      #TODO:
-      #in bin einbauen
-      #tests schreiben
-      #universal machen
-      #in fidius-common einfügen
-      #in cve-db einfügen
     end
   end
 end

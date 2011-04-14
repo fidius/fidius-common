@@ -1,3 +1,11 @@
+#Copied and modified from yamldb gem (https://github.com/ludicast/yaml_db)
+#
+#This module deals with the serialization of the database schema and
+#tables. It was extended by the establishment of the ActiveRecord
+#connection to use the module without a Rails environment.
+#
+#dump_schema and load-schema are modified ActiveRecord rake-tasks.
+
 module SerializationHelper
 
   class Base
@@ -53,14 +61,14 @@ module SerializationHelper
         target_dir += '/'
       end
       dir = target_dir + @db_entry
-        if timestamp
-          timestamp = Time.now
-          dir += "_#{timestamp.strftime("%Y-%m-%d_%H%M%S")}"
-        end
+      if timestamp
+        timestamp = Time.now
+        dir += "_#{timestamp.strftime("%Y-%m-%d_%H%M%S")}"
+      end
 
-        Dir.mkdir dir
-        @data_dir = File.expand_path(dir)
-        @data_filename = "#{@data_dir}/#{@db_entry}.yml"
+      Dir.mkdir dir
+      @data_dir = File.expand_path(dir)
+      @data_filename = "#{@data_dir}/#{@db_entry}.#{@extension}"
 
       disable_logger
       dump_schema
@@ -74,7 +82,7 @@ module SerializationHelper
         @data_dir = import_dir
         disable_logger
         load_schema
-        @loader.load(File.new("#{@data_dir}/#{@db_entry}.yml", "r"), truncate)
+        @loader.load(File.new("#{@data_dir}/#{@db_entry}.#{@extension}", "r"), truncate)
         reenable_logger
       else
         puts "#{import_dir} does not exist!"
