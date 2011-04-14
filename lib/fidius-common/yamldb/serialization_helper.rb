@@ -19,6 +19,10 @@ module SerializationHelper
       establish_connection(config_filename, db_entry)
     end
 
+    # Set configuration for the ActiveRecord connection.
+    #@param [String] path to yaml configuration file
+    #@param [String] name of the db entry in the configuration file
+    #
     def establish_connection(yml_file, db_entry)
       if yml_file.class == String
         raise "#{yml_file} does not exist" unless File.exists? File.expand_path(yml_file)
@@ -56,6 +60,10 @@ module SerializationHelper
       end
     end
 
+    # Added creation of directories with timestamps.
+    #@param [String] path to target dir
+    #@param [Boolean] true, if timestamp should be added
+    #
     def dump(target_dir, timestamp)
       unless target_dir.empty? and !Dir.exists?(target_dir)
         target_dir += '/'
