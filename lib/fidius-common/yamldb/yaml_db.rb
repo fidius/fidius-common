@@ -1,4 +1,10 @@
 #Copied and modified from yamldb gem (https://github.com/ludicast/yaml_db)
+#
+# Credits:
+# Created by Orion Henry and Adam Wiggins.
+# Major updates by Ricardo Chimal, Jr.
+# Patches contributed by Michael Irwin, Tom Locke, and Tim Galeckas.
+
 require 'yaml'
 require 'active_record'
 require 'fidius-common/yamldb/serialization_helper'
