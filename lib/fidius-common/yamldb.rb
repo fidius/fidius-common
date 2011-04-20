@@ -4,6 +4,7 @@ require "fidius-common/yamldb/yaml_db"
 
 module FIDIUS
   module Common
+    # Provides methods for the export/import of database dumps to/from YAML.
     module Db
       # Exports database schema and content to yml file. This should work
       # for all ActiveRecord database adapters.

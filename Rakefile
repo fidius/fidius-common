@@ -1,7 +1,7 @@
 require 'rubygems'
 require 'bundler'
 Bundler::GemHelper.install_tasks
-  
+
 require 'rake/testtask'
 Rake::TestTask.new do |t|
   t.libs << "test"
@@ -20,7 +20,9 @@ begin
       '--private',   # include private methods
       '--protected', # include protected methods
       '--files', static_files,
-      '--readme', 'README.md'
+      '--readme', 'README.md',
+      '--exclude', 'lib/fidius-common/yamldb/serialization_helper.rb',
+      '--exclude', 'lib/fidius-common/yamldb/yaml_db.rb'
     ]
   end
 rescue LoadError
