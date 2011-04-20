@@ -1,5 +1,4 @@
 require 'fidius-common/ip-helper'
-require 'fidius-common/yamldb'
 
 # FIDIUS Intrusion Detection with Intelligent User Support.
 # @see http://fidius.me
@@ -10,6 +9,7 @@ module FIDIUS
   module Common
 
     autoload :VERSION, './fidius-common/version'
+    autoload :Db,      './fidius-common/yamldb'
 
     # Since this addon changes behaviour of +to_json+, you have to
     # require it explicitly either with this helper method or manually

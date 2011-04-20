@@ -1,10 +1,10 @@
-#Copied and modified from yamldb gem (https://github.com/ludicast/yaml_db)
+# Copied and modified from yamldb gem (https://github.com/ludicast/yaml_db)
 #
-#This module deals with the serialization of the database schema and
-#tables. It was extended by the establishment of the ActiveRecord
-#connection to use the module without a Rails environment.
+# This module deals with the serialization of the database schema and
+# tables. It was extended by the establishment of the ActiveRecord
+# connection to use the module without a Rails environment.
 #
-#dump_schema and load-schema are modified ActiveRecord rake-tasks.
+# dump_schema and load-schema are modified ActiveRecord rake-tasks.
 
 module SerializationHelper
 
@@ -20,9 +20,9 @@ module SerializationHelper
     end
 
     # Set configuration for the ActiveRecord connection.
-    #@param [String] path to yaml configuration file
-    #@param [String] name of the db entry in the configuration file
-    #
+    # 
+    # @param [String] path to yaml configuration file
+    # @param [String] name of the db entry in the configuration file
     def establish_connection(yml_file, db_entry)
       if yml_file.class == String
         raise "#{yml_file} does not exist" unless File.exists? File.expand_path(yml_file)
@@ -61,9 +61,8 @@ module SerializationHelper
     end
 
     # Added creation of directories with timestamps.
-    #@param [String] path to target dir
-    #@param [Boolean] true, if timestamp should be added
-    #
+    # @param [String] path to target dir
+    # @param [Boolean] true, if timestamp should be added
     def dump(target_dir, timestamp)
       unless target_dir.empty? and !Dir.exists?(target_dir)
         target_dir += '/'
