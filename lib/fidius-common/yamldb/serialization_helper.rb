@@ -1,5 +1,10 @@
 #Copied and modified from yamldb gem (https://github.com/ludicast/yaml_db)
 #
+# Credits:
+# Created by Orion Henry and Adam Wiggins.
+# Major updates by Ricardo Chimal, Jr.
+# Patches contributed by Michael Irwin, Tom Locke, and Tim Galeckas.
+#
 #This module deals with the serialization of the database schema and
 #tables. It was extended by the establishment of the ActiveRecord
 #connection to use the module without a Rails environment.
