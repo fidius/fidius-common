@@ -8,7 +8,6 @@ class CreateAbcs < ActiveRecord::Migration
       t.timestamps
     end
 
-    Abc.find_or_create_by_a_b_c(:a => 'TestA', :b => 1, :c => "TestC")
   end
 
   def self.down
