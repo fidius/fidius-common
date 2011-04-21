@@ -1,9 +1,8 @@
-require 'rake/testtask'
 require 'active_record'
 require 'logger'
 
-module FIDIUS
 
+module DbInstall
   def self.migrate migrations_path, db_config_path
     @CFG_D = db_config_path
 
@@ -16,10 +15,7 @@ module FIDIUS
     end
 
     self.create_database @connection_data['test_db']
-    puts File.expand_path(db_config_path)
-    p = File.expand_path(migrations_path)
-    puts File.join(p,'20110415111241_create_abcs.rb')
-    puts File.exists?(File.join(p,'20110415111241_create_abcs.rb'))
+
     self.with_db do
       ActiveRecord::Migrator.migrate(migrations_path, ENV["VERSION"] ? ENV["VERSION"].to_i : nil)
     end
