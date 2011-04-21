@@ -3,6 +3,8 @@ require 't_helper'
 require 'fidius-common/yamldb'
 require 'sqlite3'
 require 'fileutils'
+require 'test/test_yamldb/models/abc'
+require 'test/test_yamldb/models/def'
 
 class YamlDbTest < Test::Unit::TestCase
   def test_export
